@@ -12,8 +12,8 @@ import {
 } from "react-icons/fa";
 import { TbUserSquareRounded } from "react-icons/tb";
 import profile from "../../../images/profile.jpg";
-
 import supabase from "../../../services/database/database";
+
 
 const socials = [
   {
@@ -58,7 +58,7 @@ const socials = [
   },
 ];
 
-const Profile = () => {
+const Presence = () => {
 
   const [applicant, setApplicant] = useState({})
 
@@ -69,12 +69,13 @@ const Profile = () => {
 
     const getExamData = async() => {
     
-        let { data: exam_profiles, error } = await supabase
-            .from('exam_profiles')
+        let { data: exam_presences, error } = await supabase
+            .from('exam_presences')
+            .eq('id', '')
             .select('*')
 
         if(!error){
-        setApplicant(exam_profiles[0])
+        setApplicant(exam_presences[0])
         }
             
     }
@@ -90,10 +91,10 @@ const Profile = () => {
       <div className="">
         
       </div>
-      {/* <div className="w-24 h-24 rounded-md overflow-hidden mx-auto mb-5">
+      <div className="w-24 h-24 rounded-md overflow-hidden mx-auto mb-5">
         <img src={profile} alt="shafiqhammad" className="w-full" />
-      </div> */}
-      {/* <div className="text-center">
+      </div>
+      <div className="text-center">
         <h1 className="text-xl text-gray-800 font-bold mb-1">John Doe</h1>
         <p className="text-sm text-gray-400 mb-3">
           Frontend Web Developer at
@@ -108,21 +109,21 @@ const Profile = () => {
         >
           Download Resume
         </a>
-        <ul className="flex flex-wrap justify-center">
+        {/* <ul className="flex flex-wrap justify-center">
           {socials.map((social, id) => (
             <SocialIcon social={social} key={id} />
           ))}
-        </ul>
-      </div> */}
+        </ul> */}
+      </div>
       <div
             className="xl:w-[80%] lg:w-[90%] md:w-[90%] sm:w-[92%] w-[90%] mx-auto flex flex-col gap-4 items-center relative lg:-top-8 md:-top-6 -top-4">
             {/* <!-- Description --> */}
             <p className="w-fit text-gray-700 dark:text-gray-400 text-md"></p>
-{/* Lorem, ipsum dolor sit amet
+Lorem, ipsum dolor sit amet
                 consectetur adipisicing elit. Quisquam debitis labore consectetur voluptatibus mollitia dolorem
                 veniam omnis ut quibusdam minima sapiente repellendus asperiores explicabo, eligendi odit, dolore
                 similique fugiat dolor, doloremque eveniet. Odit, consequatur. Ratione voluptate exercitationem hic
-                eligendi vitae animi nam in, est earum culpa illum aliquam. */}
+                eligendi vitae animi nam in, est earum culpa illum aliquam.
 
             {/* <!-- Detail --> */}
             <div className="w-full my-auto py-6 flex flex-col justify-center gap-2">
@@ -250,6 +251,6 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default Presence;
 
 

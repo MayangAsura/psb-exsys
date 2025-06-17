@@ -1,8 +1,11 @@
 // craco.config.js
+// const tailwindcss = require("tailwindcss");
+
 module.exports = {
   style: {
-    postcss: {
+    postcssOptions: {
       plugins: [
+        // tailwindcss('./tailwind.config.js'),
         require('tailwindcss'),
         require('autoprefixer'),
       ],
@@ -13,7 +16,8 @@ module.exports = {
             "preset-react": { "throwIfNamespace": false },
           }
         ]
-  ]
+      ]
     },
   },
+  eslint: false
 }

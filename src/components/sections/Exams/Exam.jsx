@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   FaBehance,
   FaDribbble,
@@ -15,6 +15,10 @@ import { TbUserSquareRounded } from "react-icons/tb";
 import ExamItem from "./items/ExamItem";
 // import ServiceItem from "../..pages/Service/ServiceItem";
 import profile from "../../../images/profile.jpg";
+
+import supabase from "../../../services/database/database";
+
+const [examData, setExamData] = useState([])
 
 const socials = [
   {
@@ -58,8 +62,6 @@ const socials = [
     link: "#0",
   },
 ];
-
-
 
 const serviceData = [
   {
@@ -106,6 +108,22 @@ const serviceData = [
   },
 ];
 
+useEffect(() => {
+  getExamData()
+},[])
+
+const getExamData = async() => {
+  
+  let { data: exam_tests, error } = await supabase
+    .from('exam_tests')
+    .select('*')
+
+    if(!error){
+      setExamData(exam_tests)
+    }
+          
+}
+
 const Exam = () => {
   return (
     <section className="pb-10">
@@ -133,8 +151,8 @@ const Exam = () => {
                 {/* {icon} */}
                 </div>
                 <div className="flex flex-wrap md:px-4">
-                {serviceData.map((service, id) => (
-                    <ExamItem service={service} key={id} />
+                {examData.map((exam, id) => (
+                    <ExamItem exam={exam} key={id} />
                 ))}
                 </div>
             </div>
